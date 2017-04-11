@@ -1,0 +1,17 @@
+{
+    "name": "simplephp/request",
+    "description": "Parse request parameters to object.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tyler Gillispie"
+        }
+    ],
+    "require": {
+        "php": "^5.3 || ^7.0"
+    },
+		"autoload": {
+			"classmap": ["src"]
+		}
+}
