@@ -1,5 +1,5 @@
 {
-    "name": "simplephp/request",
+    "name": "somephp/request",
     "description": "Parse request parameters to object.",
     "type": "project",
     "license": "MIT",
