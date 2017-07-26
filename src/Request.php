@@ -1,36 +1,24 @@
 <?php
-/**
- * Parse declared request parameters for json, array, value, or null.
- */
 class Request {
-  function __construct($param = false) {
-    if (! is_array($param)) {
-      throw new Exception('Request: Expects param array.');
-    }
-
-    // Loop through all declared parameters and parse them acccordingly.
-    foreach($param as $item) {
-
-      // Set empty values to null.
-      if (empty($item) || empty($_REQUEST[$item])) {
-        $value = null;
-
-      // Check value for an array.
-      } else if (is_array($_REQUEST[$item])) {
-        $value = $_REQUEST[$item];
-
-      // Check value for json.
-      } else if ($json = json_decode($_REQUEST[$item])) {
-          $value = $json;
-
-      // Let php parse anything remaining. (ararys, or single values.)
+	/*
+  * Parse request parameters.  Decode JSON, default to null.
+  *
+  * @param str[] $paramList  An Array of expected request parameters.
+  *
+  * @return object  Contains all params with null for missing params,
+  *   values if they exist, or a json decoded object/array.
+  */
+  function Request($paramList) {
+		foreach($parameter as $param) {
+			if (isset($_REQUEST[$param]) && ! empty($_REQUEST[$param])) {
+        $this->$param = $_REQUEST[$param];
       } else {
-        $value = $_REQUEST[$item];
+        $this->$param = null;
       }
 
-      // Save the parameter.
-      $this->{$item} = $value;
+      if (json_decode($this->$param)) {
+        $this->$param = json_decode($this->$param);
+      }
     }
-  }
-
+  }    
 }
